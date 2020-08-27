@@ -119,21 +119,35 @@ In upcoming Istio releases we are moving `istio-policy` and `istio-telemetry` fu
 This will decrease the amount data flowing through the system, which will in turn reduce the CPU usage and latency.
 
 {{< image width="90%"
-    link="latency_p90_fortio.svg"
+    link="latency_p90_fortio_without_jitter.svg"
     alt="P90 latency vs client connections"
-    caption="P90 latency vs client connections"
+    caption="P90 latency vs client connections without jitter"
 >}}
 
 {{< image width="90%"
-    link="latency_p99_fortio.svg"
+    link="latency_p99_fortio_without_jitter.svg"
     alt="P99 latency vs client connections"
-    caption="P99 latency vs client connections"
+    caption="P99 latency vs client connections without jitter"
+>}}
+
+{{< image width="90%"
+    link="latency_p90_fortio_with_jitter.svg"
+    alt="P90 latency vs client connections"
+    caption="P90 latency vs client connections with jitter"
+>}}
+
+{{< image width="90%"
+    link="latency_p99_fortio_with_jitter.svg"
+    alt="P99 latency vs client connections"
+    caption="P99 latency vs client connections with jitter"
 >}}
 
 - `baseline` Client pod directly calls the server pod, no sidecars are present.
-- `none-both` Istio proxy with no Istio specific filters configured.
-- `telemetryv2-both` client and server sidecars are present with telemetry v2 `nullvm` configured by default.
-- `mixer-both` Client and server sidecars are present with mixer configured.
+- `none_both` Istio proxy with no Istio specific filters configured.
+- `v2-stats-wasm_both` client and server sidecars are present with telemetry v2 `wasm` configured.
+- `v2-stats-nullvm_both` client and server sidecars are present with telemetry v2 `nullvm` configured by default.
+- `v2-sd-full-nullvm_both` Export stackdriver metrics, accesslogs and edgeswith telemetry v2 `nullvm` configured.
+- `v2-sd-nologging-nullvm_both` Same as above, but does not export accesslogs.
 
 ### Benchmarking tools
 
